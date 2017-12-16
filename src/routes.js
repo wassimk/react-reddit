@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Posts, NewPost } from './containers';
+import { Home, Posts, NewPost, Category } from './containers';
 import { Route, Link } from 'react-router-dom';
 
 export default () => (
@@ -19,6 +19,7 @@ export default () => (
     <hr />
 
     <Route exact path="/" component={Home} />
+    <Route exact path="/:category/posts" component={Category} />
     <Route exact path="/posts" component={Posts} />
     <Route path="/posts/new" component={NewPost} />
   </div>

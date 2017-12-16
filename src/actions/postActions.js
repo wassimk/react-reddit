@@ -15,6 +15,19 @@ export const fetchPosts = () => {
   };
 };
 
+export const fetchPostsByCategory = category => {
+  return async (dispatch, getState) => {
+    const posts = await fetchAsync(`http://localhost:3001/${category}/posts`);
+
+    dispatch({
+      type: types.SET_POSTS,
+      payload: {
+        posts
+      }
+    });
+  };
+};
+
 export const createPost = postParams => {
   return async dispatch => {
     const newPost = await fetchAsync('http://localhost:3001/posts', {

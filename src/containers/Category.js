@@ -3,14 +3,13 @@ import * as actionCreators from '../actions';
 import formatDate from '../util/formatDate';
 import { connect } from 'react-redux';
 import { orderBy } from 'lodash';
-import { Link } from 'react-router-dom';
-class Home extends Component {
+class Category extends Component {
   state = {
     orderBy: 'timestamp'
   };
+
   componentWillMount = () => {
-    this.props.fetchCategories();
-    this.props.fetchPosts();
+    this.props.fetchPostsByCategory(this.props.match.params.category);
   };
 
   handleSort = e => {
@@ -26,13 +25,6 @@ class Home extends Component {
           </option>
           <option value="voteScore">Score</option>
         </select>
-        <div>
-          {this.props.categories.map((category, index) => (
-            <Link to={`${category.path}/posts`} key={index}>
-              {category.name}
-            </Link>
-          ))}
-        </div>
 
         <div>
           {orderBy(this.props.posts, this.state.orderBy).map((post, index) => (
@@ -48,9 +40,8 @@ class Home extends Component {
 
 const mapStateToProps = (state, componentState) => {
   return {
-    categories: state.categories,
     posts: state.posts
   };
 };
 
-export default connect(mapStateToProps, actionCreators)(Home);
+export default connect(mapStateToProps, actionCreators)(Category);
