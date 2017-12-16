@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import * as actionCreators from '../actions';
-import formatDate from '../util/formatDate';
 import { connect } from 'react-redux';
-import { orderBy } from 'lodash';
 import { Link } from 'react-router-dom';
 import { Posts } from '../components';
 
