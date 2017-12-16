@@ -12,10 +12,6 @@ export default class Posts extends PureComponent {
     this.setState({ orderBy: e.target.value });
   };
 
-  handleDelete = id => {
-    this.props.deletePost(id);
-  };
-
   render() {
     if (this.props.posts.length === 0)
       return <div>No Posts for this Category</div>;
@@ -34,7 +30,15 @@ export default class Posts extends PureComponent {
               <Link to={`/posts/${post.id}`}>{post.title}</Link> on{' '}
               {formatDate(post.timestamp)} ({post.voteScore})
               <Link to={`/posts/${post.id}/edit`}>Edit</Link>
-              <button onClick={() => this.handleDelete(post.id)}>Delete</button>
+              <button onClick={() => this.props.actions.downVotePost(post.id)}>
+                Down
+              </button>
+              <button onClick={() => this.props.actions.upVotePost(post.id)}>
+                Up
+              </button>
+              <button onClick={() => this.props.actions.deletePost(post.id)}>
+                Delete
+              </button>
             </div>
           ))}
         </div>

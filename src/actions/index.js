@@ -6,5 +6,7 @@ export {
   createPost,
   deletePost,
   updatePost,
+  upVotePost,
+  downVotePost,
   fetchPostsByCategory
 } from './postActions';

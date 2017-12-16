@@ -21,10 +21,7 @@ class Home extends Component {
             </Link>
           ))}
         </div>
-        <Posts
-          posts={this.props.posts}
-          deletePost={this.props.actions.deletePost}
-        />
+        <Posts posts={this.props.posts} actions={this.props.actions} />
       </div>
     );
   }

@@ -100,3 +100,29 @@ export const updatePost = post => {
     return updatedPost;
   };
 };
+
+export const upVotePost = id => {
+  return voteOnPost(id, 'upVote');
+};
+
+export const downVotePost = id => {
+  return voteOnPost(id, 'downVote');
+};
+
+const voteOnPost = (id, option) => {
+  return async (dispatch, getState) => {
+    const updatedPost = await fetchAsync(`http://localhost:3001/posts/${id}`, {
+      method: 'POST',
+      body: JSON.stringify({ option })
+    });
+
+    dispatch({
+      type: types.UPDATE_POST,
+      payload: {
+        post: updatedPost
+      }
+    });
+
+    return updatedPost;
+  };
+};
