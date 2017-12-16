@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import * as actionCreators from '../actions';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Posts } from '../components';
 
 class Category extends Component {
   componentWillMount = () => {
-    this.props.fetchPostsByCategory(this.props.match.params.category);
+    this.props.actions.fetchPostsByCategory(this.props.match.params.category);
   };
 
   render() {
     return (
-      <Posts posts={this.props.posts} deletePost={this.props.deletePost} />
+      <Posts
+        posts={this.props.posts}
+        deletePost={this.props.actions.deletePost}
+      />
     );
   }
 }
@@ -21,4 +25,10 @@ const mapStateToProps = (state, componentState) => {
   };
 };
 
-export default connect(mapStateToProps, actionCreators)(Category);
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Category);

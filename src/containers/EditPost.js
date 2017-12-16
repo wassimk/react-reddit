@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import * as actionCreators from '../actions';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import serializeForm from '../util/serializeForm';
 import { PostForm } from '../components';
 
 class EditPost extends Component {
   form = {};
   componentWillMount = () => {
-    this.props.fetchCategories();
-    this.props.fetchPost(this.props.match.params.id);
+    this.props.actions.fetchCategories();
+    this.props.actions.fetchPost(this.props.match.params.id);
   };
 
   handleSubmit = e => {
     e.preventDefault();
     const formValues = serializeForm(this.form);
-    this.props.updatePost(formValues).then(post => {
+    this.props.actions.updatePost(formValues).then(post => {
       this.props.history.push(`/posts/${post.id}`);
     });
   };
@@ -40,4 +41,10 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps, actionCreators)(EditPost);
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditPost);

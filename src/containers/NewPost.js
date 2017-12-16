@@ -3,17 +3,18 @@ import * as actionCreators from '../actions';
 import { connect } from 'react-redux';
 import serializeForm from '../util/serializeForm';
 import { PostForm } from '../components';
+import { bindActionCreators } from 'redux';
 
 class NewPost extends Component {
   form = {};
   componentWillMount = () => {
-    this.props.fetchCategories();
+    this.props.actions.fetchCategories();
   };
 
   handleSubmit = e => {
     e.preventDefault();
     const formValues = serializeForm(this.form);
-    this.props.createPost(formValues).then(post => {
+    this.props.actions.createPost(formValues).then(post => {
       this.props.history.push(`/posts/${post.id}`);
     });
   };
@@ -38,4 +39,10 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps, actionCreators)(NewPost);
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewPost);

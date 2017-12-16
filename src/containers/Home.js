@@ -3,11 +3,12 @@ import * as actionCreators from '../actions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Posts } from '../components';
+import { bindActionCreators } from 'redux';
 
 class Home extends Component {
   componentWillMount = () => {
-    this.props.fetchCategories();
-    this.props.fetchPosts();
+    this.props.actions.fetchCategories();
+    this.props.actions.fetchPosts();
   };
 
   render() {
@@ -20,7 +21,10 @@ class Home extends Component {
             </Link>
           ))}
         </div>
-        <Posts posts={this.props.posts} deletePost={this.props.deletePost} />
+        <Posts
+          posts={this.props.posts}
+          deletePost={this.props.actions.deletePost}
+        />
       </div>
     );
   }
@@ -33,4 +37,10 @@ const mapStateToProps = (state, componentState) => {
   };
 };
 
-export default connect(mapStateToProps, actionCreators)(Home);
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
