@@ -1,1 +1,2 @@
-export * as postActions from './postActions';
+export { postActions } from './postActions';
+export { fetchCategories } from './categoryActions';
