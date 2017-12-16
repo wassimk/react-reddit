@@ -1,3 +1,8 @@
 export { postActions } from './postActions';
 export { fetchCategories } from './categoryActions';
-export { fetchPosts, createPost, fetchPostsByCategory } from './postActions';
+export {
+  fetchPost,
+  fetchPosts,
+  createPost,
+  fetchPostsByCategory
+} from './postActions';

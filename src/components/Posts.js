@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import formatDate from '../util/formatDate';
 import { orderBy } from 'lodash';
+import { Link } from 'react-router-dom';
 
 export default class Posts extends PureComponent {
   state = {
@@ -25,8 +26,11 @@ export default class Posts extends PureComponent {
 
         <div>
           {orderBy(this.props.posts, this.state.orderBy).map((post, index) => (
-            <div key={index}>
-              {post.title} on {formatDate(post.timestamp)} ({post.voteScore})
+            <div>
+              <Link to={`posts/${post.id}`} key={index}>
+                {post.title}
+              </Link>{' '}
+              on {formatDate(post.timestamp)} ({post.voteScore})
             </div>
           ))}
         </div>
