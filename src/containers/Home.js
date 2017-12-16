@@ -20,7 +20,7 @@ class Home extends Component {
             </Link>
           ))}
         </div>
-        <Posts posts={this.props.posts} />
+        <Posts posts={this.props.posts} deletePost={this.props.deletePost} />
       </div>
     );
   }

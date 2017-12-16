@@ -63,6 +63,23 @@ export const createPost = postParams => {
   };
 };
 
+export const deletePost = id => {
+  return async (dispatch, getState) => {
+    await fetchAsync(`http://localhost:3001/posts/${id}`, {
+      method: 'DELETE'
+    });
+
+    dispatch({
+      type: types.DELETE_POST,
+      payload: {
+        id: id
+      }
+    });
+
+    return new Promise(resolve => resolve());
+  };
+};
+
 export const updatePost = post => {
   return async (dispatch, getState) => {
     const updatedPost = await fetchAsync(

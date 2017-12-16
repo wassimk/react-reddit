@@ -9,7 +9,9 @@ class Category extends Component {
   };
 
   render() {
-    return <Posts posts={this.props.posts} />;
+    return (
+      <Posts posts={this.props.posts} deletePost={this.props.deletePost} />
+    );
   }
 }
 
