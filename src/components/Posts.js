@@ -26,11 +26,10 @@ export default class Posts extends PureComponent {
 
         <div>
           {orderBy(this.props.posts, this.state.orderBy).map((post, index) => (
-            <div>
-              <Link to={`posts/${post.id}`} key={index}>
-                {post.title}
-              </Link>{' '}
-              on {formatDate(post.timestamp)} ({post.voteScore})
+            <div key={index}>
+              <Link to={`/posts/${post.id}`}>{post.title}</Link> on{' '}
+              {formatDate(post.timestamp)} ({post.voteScore})
+              <Link to={`/posts/${post.id}/edit`}>Edit</Link>
             </div>
           ))}
         </div>

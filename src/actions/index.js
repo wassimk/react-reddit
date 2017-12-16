@@ -4,5 +4,6 @@ export {
   fetchPost,
   fetchPosts,
   createPost,
+  updatePost,
   fetchPostsByCategory
 } from './postActions';

@@ -10,6 +10,14 @@ export default function reducer(state = posts, action) {
       return action.payload.posts;
     case types.CREATE_POST:
       return [...state, action.payload.post];
+    case types.UPDATE_POST:
+      return state.map(post => {
+        if (post.id === action.payload.post.id) {
+          return action.payload.post;
+        } else {
+          return post;
+        }
+      });
     default:
       return state;
   }

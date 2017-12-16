@@ -58,5 +58,28 @@ export const createPost = postParams => {
         post: newPost
       }
     });
+
+    return newPost;
+  };
+};
+
+export const updatePost = post => {
+  return async (dispatch, getState) => {
+    const updatedPost = await fetchAsync(
+      `http://localhost:3001/posts/${post.id}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(post)
+      }
+    );
+
+    dispatch({
+      type: types.UPDATE_POST,
+      payload: {
+        post: updatedPost
+      }
+    });
+
+    return updatedPost;
   };
 };

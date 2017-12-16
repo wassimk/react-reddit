@@ -1,6 +1,6 @@
 import React from 'react';
-import { Home, Post, NewPost, Category } from './containers';
-import { Route, Link } from 'react-router-dom';
+import { Home, Post, EditPost, NewPost, Category } from './containers';
+import { Route, Link, Switch } from 'react-router-dom';
 
 export default () => (
   <div>
@@ -14,10 +14,12 @@ export default () => (
     </ul>
 
     <hr />
-
-    <Route exact path="/" component={Home} />
-    <Route exact path="/:category/posts" component={Category} />
-    <Route exact path="/posts/:id" component={Post} />
-    <Route path="/posts/new" component={NewPost} />
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/:category/posts" component={Category} />
+      <Route path="/posts/new" component={NewPost} />
+      <Route exact path="/posts/:id" component={Post} />
+      <Route path="/posts/:id/edit" component={EditPost} />
+    </Switch>
   </div>
 );

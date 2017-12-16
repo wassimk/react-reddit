@@ -4,16 +4,17 @@ import { connect } from 'react-redux';
 import serializeForm from '../util/serializeForm';
 import { PostForm } from '../components';
 
-class NewPost extends Component {
+class EditPost extends Component {
   form = {};
   componentWillMount = () => {
     this.props.fetchCategories();
+    this.props.fetchPost(this.props.match.params.id);
   };
 
   handleSubmit = e => {
     e.preventDefault();
     const formValues = serializeForm(this.form);
-    this.props.createPost(formValues).then(post => {
+    this.props.updatePost(formValues).then(post => {
       this.props.history.push(`/posts/${post.id}`);
     });
   };
@@ -25,7 +26,8 @@ class NewPost extends Component {
         post={this.props.post}
         categories={this.props.categories}
         handleSubmit={this.handleSubmit}
-        formAction="Add Post"
+        isEditing={true}
+        formAction="Update Post"
       />
     );
   }
@@ -34,8 +36,8 @@ class NewPost extends Component {
 const mapStateToProps = (state, props) => {
   return {
     categories: state.categories,
-    post: {}
+    post: state.posts.filter(post => post.id === props.match.params.id)[0]
   };
 };
 
-export default connect(mapStateToProps, actionCreators)(NewPost);
+export default connect(mapStateToProps, actionCreators)(EditPost);
