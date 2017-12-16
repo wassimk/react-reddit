@@ -4,28 +4,17 @@ import formatDate from '../util/formatDate';
 import { connect } from 'react-redux';
 import { orderBy } from 'lodash';
 import { Link } from 'react-router-dom';
+import { Posts } from '../components';
+
 class Home extends Component {
-  state = {
-    orderBy: 'timestamp'
-  };
   componentWillMount = () => {
     this.props.fetchCategories();
     this.props.fetchPosts();
   };
 
-  handleSort = e => {
-    this.setState({ orderBy: e.target.value });
-  };
-
   render() {
     return (
       <div>
-        <select onChange={this.handleSort}>
-          <option default value="timestamp">
-            Date
-          </option>
-          <option value="voteScore">Score</option>
-        </select>
         <div>
           {this.props.categories.map((category, index) => (
             <Link to={`${category.path}/posts`} key={index}>
@@ -33,14 +22,7 @@ class Home extends Component {
             </Link>
           ))}
         </div>
-
-        <div>
-          {orderBy(this.props.posts, this.state.orderBy).map((post, index) => (
-            <div key={index}>
-              {post.title} on {formatDate(post.timestamp)} ({post.voteScore})
-            </div>
-          ))}
-        </div>
+        <Posts posts={this.props.posts} />
       </div>
     );
   }
