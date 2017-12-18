@@ -27,7 +27,6 @@ export const createComment = commentParams => {
 export const fetchCommentsByPostId = id => {
   return async (dispatch, getState) => {
     const comments = await fetchAsync(`http://localhost:3001/posts/${id}/comments`);
-    console.log(`http://localhost:3001/posts/${id}/comments`);
 
     dispatch({
       type: types.SET_COMMENTS,
