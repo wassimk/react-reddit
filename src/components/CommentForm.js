@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
+import serialize from 'form-serialize';
 
 export default class CommentForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const formValues = {
-      parentId: e.target.elements.parentId.value,
-      body: e.target.elements.body.value,
-      author: e.target.elements.author.value
-    };
+    const formParams = serialize(e.target, { hash: true });
 
-    this.props.actions.createComment(formValues);
+    this.props.actions.createComment(formParams);
   };
 
   render() {
