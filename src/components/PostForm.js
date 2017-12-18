@@ -6,23 +6,14 @@ export default class PostForm extends Component {
     if (!post) return null;
     return (
       <form onSubmit={handleSubmit}>
-        <input
-          type="hidden"
-          defaultValue={post.id}
-          ref={ref => (innerRef.id = ref)}
-          name="id"
-        />
+        <input type="hidden" defaultValue={post.id} ref={ref => (innerRef.id = ref)} name="id" />
         <input
           type="text"
           defaultValue={post.title}
           ref={ref => (innerRef.title = ref)}
           name="title"
         />
-        <textarea
-          name="body"
-          defaultValue={post.body}
-          ref={ref => (innerRef.body = ref)}
-        />
+        <textarea name="body" defaultValue={post.body} ref={ref => (innerRef.body = ref)} />
         {!isEditing && (
           <input
             type="text"
@@ -31,10 +22,7 @@ export default class PostForm extends Component {
             name="author"
           />
         )}
-        <select
-          defaultValue={post.category}
-          ref={ref => (innerRef.category = ref)}
-          name="category">
+        <select defaultValue={post.category} ref={ref => (innerRef.category = ref)} name="category">
           {categories.map((category, index) => (
             <option key={index} value={category.name}>
               {category.name}

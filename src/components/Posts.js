@@ -13,8 +13,7 @@ export default class Posts extends PureComponent {
   };
 
   render() {
-    if (this.props.posts.length === 0)
-      return <div>No Posts for this Category</div>;
+    if (this.props.posts.length === 0) return <div>No Posts for this Category</div>;
     return (
       <div>
         <select onChange={this.handleSort}>
@@ -27,18 +26,13 @@ export default class Posts extends PureComponent {
         <div>
           {orderBy(this.props.posts, this.state.orderBy).map((post, index) => (
             <div key={index}>
-              <Link to={`/posts/${post.id}`}>{post.title}</Link> on{' '}
-              {formatDate(post.timestamp)} ({post.voteScore})
+              <Link to={`/posts/${post.id}`}>{post.title}</Link> on {formatDate(post.timestamp)} ({
+                post.voteScore
+              })
               <Link to={`/posts/${post.id}/edit`}>Edit</Link>
-              <button onClick={() => this.props.actions.downVotePost(post.id)}>
-                Down
-              </button>
-              <button onClick={() => this.props.actions.upVotePost(post.id)}>
-                Up
-              </button>
-              <button onClick={() => this.props.actions.deletePost(post.id)}>
-                Delete
-              </button>
+              <button onClick={() => this.props.actions.downVotePost(post.id)}>Down</button>
+              <button onClick={() => this.props.actions.upVotePost(post.id)}>Up</button>
+              <button onClick={() => this.props.actions.deletePost(post.id)}>Delete</button>
             </div>
           ))}
         </div>

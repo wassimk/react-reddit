@@ -82,13 +82,10 @@ export const deletePost = id => {
 
 export const updatePost = post => {
   return async (dispatch, getState) => {
-    const updatedPost = await fetchAsync(
-      `http://localhost:3001/posts/${post.id}`,
-      {
-        method: 'PUT',
-        body: JSON.stringify(post)
-      }
-    );
+    const updatedPost = await fetchAsync(`http://localhost:3001/posts/${post.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(post)
+    });
 
     dispatch({
       type: types.UPDATE_POST,
