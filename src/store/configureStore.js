@@ -17,7 +17,7 @@ export function configureStore(initialState) {
       middleware,
       window.devToolsExtension
         ? window.devToolsExtension()
-        : require('./DevTools').default.instrument(),
+        : require('./devTools').default.instrument(),
       persistState(getDebugSessionKey())
     );
   } else {
