@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 export default class PostForm extends Component {
   render() {
     const { handleSubmit, post, innerRef, categories, isEditing } = this.props;
+
     if (!post) return null;
+
     return (
       <form onSubmit={handleSubmit}>
         <input type="hidden" defaultValue={post.id} ref={ref => (innerRef.id = ref)} name="id" />
