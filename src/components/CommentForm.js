@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import serializeForm from '../util/serializeForm';
 
 export default class CommentForm extends Component {
   handleSubmit = e => {

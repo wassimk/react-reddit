@@ -1,5 +1,4 @@
 import * as types from '../constants/actionTypes';
-import { uniqBy } from 'lodash';
 
 const comments = [];
 
