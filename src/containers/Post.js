@@ -38,12 +38,10 @@ class Post extends Component {
           <CommentForm
             post={post}
             actions={actions}
-            formAction="New Comment"
           />
         </div>
-
         {comments.map((comment, index) => (
-          <Comment key={index} actions={actions} comment={comment} />
+          <Comment key={index} post={post} actions={actions} comment={comment} />
         ))}
       </div>
     );

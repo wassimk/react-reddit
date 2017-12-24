@@ -9,19 +9,26 @@ export default class CommentForm extends Component {
 
     const formParams = serialize(form, { hash: true });
 
-    this.props.actions.createComment(formParams);
+    if (this.props.isEditing === true) {
+      this.props.actions.updateComment(formParams);
+      this.props.closeModalHandler();
+    } else {
+      this.props.actions.createComment(formParams);
+    }
 
     form.reset();
   };
 
   render() {
-    const { post, formAction, comment } = this.props;
+    const { isEditing, post, comment } = this.props;
+    const formAction = (isEditing ? 'Edit' : 'New')
 
     return (
       <div>
-        <h3>New Comment</h3>
+        <h3>{formAction} Comment</h3>
         <form onSubmit={this.handleSubmit}>
           <input name="parentId" type="hidden" defaultValue={post.id} />
+          <input name="id" type="hidden" defaultValue={isEditing ? comment.id : ''} />
           Body: {<textarea name="body" defaultValue={comment ? comment.body : null} />}
           Author:{' '}
           {<input name="author" type="text" defaultValue={comment ? comment.author : null} />}

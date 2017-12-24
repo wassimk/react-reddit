@@ -14,6 +14,7 @@ export default class Posts extends PureComponent {
 
   render() {
     if (this.props.posts.length === 0) return <div>No Posts for this Category</div>;
+
     return (
       <div>
         <select onChange={this.handleSort}>
