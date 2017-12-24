@@ -20,20 +20,25 @@ class Post extends Component {
     if (!this.props.post) return null;
     if (!this.props.comments) return null;
 
+    const { comments, actions, post } = this.props;
+
     return (
       <div>
-        {this.props.post.title}
+        {post.title}
+        (Votes: {post.voteScore})
+              (Comments: {post.commentCount})
+
         <button onClick={this.handleDelete}>Delete</button>
         <div>
           <CommentForm
-            post={this.props.post}
-            actions={this.props.actions}
+            post={post}
+            actions={actions}
             formAction="New Comment"
           />
         </div>
 
-        {this.props.comments.map((comment, index) => (
-          <Comment key={index} actions={this.props.actions} comment={comment} />
+        {comments.map((comment, index) => (
+          <Comment key={index} actions={actions} comment={comment} />
         ))}
       </div>
     );

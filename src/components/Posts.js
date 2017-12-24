@@ -26,9 +26,9 @@ export default class Posts extends PureComponent {
         <div>
           {orderBy(this.props.posts, this.state.orderBy).map((post, index) => (
             <div key={index}>
-              <Link to={`/posts/${post.id}`}>{post.title}</Link> on {formatDate(post.timestamp)} ({
-                post.voteScore
-              })
+              <Link to={`/posts/${post.id}`}>{post.title}</Link> on {formatDate(post.timestamp)}
+              (Votes: {post.voteScore})
+              (Comments: {post.commentCount})
               <Link to={`/posts/${post.id}/edit`}>Edit</Link>
               <button onClick={() => this.props.actions.downVotePost(post.id)}>Down</button>
               <button onClick={() => this.props.actions.upVotePost(post.id)}>Up</button>
