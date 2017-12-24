@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as actionCreators from '../actions';
 import { connect } from 'react-redux';
 import { CommentForm, Comment } from '../components';
+import formatDate from '../util/formatDate';
 import { bindActionCreators } from 'redux';
 
 class Post extends Component {
@@ -25,6 +26,10 @@ class Post extends Component {
     return (
       <div>
         {post.title}
+        {post.body}
+        {post.author}
+        {formatDate(post.timestamp)}
+
         (Votes: {post.voteScore})
               (Comments: {post.commentCount})
 
