@@ -1,4 +1,4 @@
-export { createComment, fetchCommentsByPostId } from './commentActions';
+export { createComment, deleteComment, fetchCommentsByPostId, updateComment, upVoteComment, downVoteComment } from './commentActions';
 export { fetchCategories } from './categoryActions';
 export {
   fetchPost,

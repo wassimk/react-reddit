@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as actionCreators from '../actions';
 import { connect } from 'react-redux';
-import { CommentForm } from '../components';
+import { CommentForm, Comment } from '../components';
 import { bindActionCreators } from 'redux';
 
 class Post extends Component {
@@ -33,9 +33,7 @@ class Post extends Component {
         </div>
 
         {this.props.comments.map((comment, index) => (
-          <div key={index}>
-            {comment.body} - {comment.author}
-          </div>
+          <Comment key={index} actions={this.props.actions} comment={comment} />
         ))}
       </div>
     );

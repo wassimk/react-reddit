@@ -24,6 +24,41 @@ export const createComment = commentParams => {
   };
 };
 
+export const deleteComment = id => {
+  return async (dispatch, getState) => {
+    await fetchAsync(`http://localhost:3001/comments/${id}`, {
+      method: 'DELETE'
+    });
+
+    dispatch({
+      type: types.DELETE_COMMENT,
+      payload: {
+        id: id
+      }
+    });
+
+    return new Promise(resolve => resolve());
+  };
+};
+
+export const updateComment = comment => {
+  return async (dispatch, getState) => {
+    const updatedComment = await fetchAsync(`http://localhost:3001/comments/${comment.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(comment)
+    });
+
+    dispatch({
+      type: types.UPDATE_COMMENT,
+      payload: {
+        comment: updatedComment
+      }
+    });
+
+    return updatedComment;
+  };
+};
+
 export const fetchCommentsByPostId = id => {
   return async (dispatch, getState) => {
     const comments = await fetchAsync(`http://localhost:3001/posts/${id}/comments`);
@@ -34,5 +69,31 @@ export const fetchCommentsByPostId = id => {
         comments
       }
     });
+  };
+};
+
+export const upVoteComment = id => {
+  return voteOnComment(id, 'upVote');
+};
+
+export const downVoteComment = id => {
+  return voteOnComment(id, 'downVote');
+};
+
+const voteOnComment = (id, option) => {
+  return async (dispatch, getState) => {
+    const updatedComment = await fetchAsync(`http://localhost:3001/comments/${id}`, {
+      method: 'POST',
+      body: JSON.stringify({ option })
+    });
+
+    dispatch({
+      type: types.UPDATE_COMMENT,
+      payload: {
+        comment: updatedComment
+      }
+    });
+
+    return updatedComment;
   };
 };

@@ -5,9 +5,13 @@ export default class CommentForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const formParams = serialize(e.target, { hash: true });
+    const form = e.target
+
+    const formParams = serialize(form, { hash: true });
 
     this.props.actions.createComment(formParams);
+
+    form.reset();
   };
 
   render() {
