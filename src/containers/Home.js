@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import * as actionCreators from '../actions';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Posts } from '../components';
 import { bindActionCreators } from 'redux';
+import { Nav, NavItem } from 'react-bootstrap';
 
 class Home extends Component {
   componentWillMount = () => {
@@ -15,11 +15,14 @@ class Home extends Component {
     return (
       <div>
         <div>
-          {this.props.categories.map((category, index) => (
-            <Link to={`${category.path}/posts`} key={index}>
-              {category.name}
-            </Link>
-          ))}
+          <h4>Post Categories:</h4>
+          <Nav bsStyle="pills" onSelect={this.handleSelect}>
+            {this.props.categories.map((category, index) => (
+              <NavItem eventKey={index} href={`${category.path}/posts`}>
+                {category.name}
+              </NavItem>
+            ))}
+          </Nav>
         </div>
         <Posts posts={this.props.posts} actions={this.props.actions} />
       </div>
