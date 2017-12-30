@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import * as actionCreators from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import serializeForm from '../util/serializeForm';
 import { PostForm } from '../components';
+import serialize from 'form-serialize';
 
 class EditPost extends Component {
   form = {};
@@ -15,9 +15,12 @@ class EditPost extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const formValues = serializeForm(this.form);
-    this.props.actions.updatePost(formValues).then(post => {
-      this.props.history.push(`/posts/${post.id}`);
+    const form = e.target;
+
+    const formParams = serialize(form, { hash: true });
+
+    this.props.actions.updatePost(formParams).then(post => {
+      this.props.history.push(`/${post.category}/${post.id}`);
     });
   };
 

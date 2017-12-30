@@ -18,7 +18,7 @@ export default () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/:category/posts" component={Category} />
       <Route path="/posts/new" component={NewPost} />
-      <Route exact path="/posts/:id" component={Post} />
+      <Route exact path="/:category/:id" component={Post} />
       <Route path="/posts/:id/edit" component={EditPost} />
     </Switch>
   </div>

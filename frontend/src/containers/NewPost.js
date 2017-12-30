@@ -19,7 +19,7 @@ class NewPost extends Component {
     const formParams = serialize(form, { hash: true });
 
     this.props.actions.createPost(formParams).then(post => {
-      this.props.history.push(`/posts/${post.id}`);
+      this.props.history.push(`/${post.category}/${post.id}`);
     });
   };
 
