@@ -13,12 +13,12 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <div>
           <h4>Post Categories:</h4>
           <Nav bsStyle="pills" onSelect={this.handleSelect}>
             {this.props.categories.map((category, index) => (
-              <NavItem eventKey={index} href={`${category.path}/posts`}>
+              <NavItem eventKey={index} key={index} href={`${category.path}/posts`}>
                 {category.name}
               </NavItem>
             ))}

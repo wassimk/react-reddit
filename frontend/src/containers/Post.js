@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { CommentForm, Comment } from '../components';
 import formatDate from '../util/formatDate';
 import { bindActionCreators } from 'redux';
+import { Button, ButtonGroup } from 'react-bootstrap';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faThumbsUp from '@fortawesome/fontawesome-free-solid/faThumbsUp';
+import faComments from '@fortawesome/fontawesome-free-solid/faComments';
 
 class Post extends Component {
   handleDelete = () => {
@@ -24,25 +28,54 @@ class Post extends Component {
     const { comments, actions, post } = this.props;
 
     return (
-      <div>
-        {post.title}
-        {post.body}
-        {post.author}
-        {formatDate(post.timestamp)}
-
-        (Votes: {post.voteScore})
-              (Comments: {post.commentCount})
-
-        <button onClick={this.handleDelete}>Delete</button>
+      <div className="container">
+        <h3>{post.title}</h3>
+        <p>{post.body}</p>
         <div>
-          <CommentForm
-            post={post}
-            actions={actions}
-          />
+          Posted on <em>{formatDate(post.timestamp)}</em> by <strong>{post.author}</strong> with{' '}
+          <strong>
+            {post.voteScore} <FontAwesomeIcon icon={faThumbsUp} />
+          </strong>{' '}
+          and{' '}
+          <strong>
+            {post.commentCount} <FontAwesomeIcon icon={faComments} />
+          </strong>.
+          <br />
+          <div>
+            <ButtonGroup>
+              <Button
+                bsStyle="success"
+                bsSize="xsmall"
+                onClick={() => this.props.actions.upVotePost(post.id)}
+              >
+                + Vote
+              </Button>
+              <Button
+                bsStyle="warning"
+                bsSize="xsmall"
+                onClick={() => this.props.actions.downVotePost(post.id)}
+              >
+                - Vote
+              </Button>
+              <Button bsStyle="info" bsSize="xsmall" href={`/posts/${post.id}/edit`}>
+                Edit
+              </Button>
+              <Button bsStyle="danger" bsSize="xsmall" onClick={this.handleDelete}>
+                Delete
+              </Button>
+            </ButtonGroup>
+          </div>
         </div>
+
+        <h5>Comments</h5>
         {comments.map((comment, index) => (
-          <Comment key={index} post={post} actions={actions} comment={comment} />
+          <div key={index}>
+            <Comment post={post} actions={actions} comment={comment} />
+          </div>
         ))}
+        <div>
+          <CommentForm post={post} actions={actions} />
+        </div>
       </div>
     );
   }

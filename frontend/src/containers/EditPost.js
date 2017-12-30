@@ -14,7 +14,7 @@ class EditPost extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    
+
     const formValues = serializeForm(this.form);
     this.props.actions.updatePost(formValues).then(post => {
       this.props.history.push(`/posts/${post.id}`);
@@ -29,7 +29,7 @@ class EditPost extends Component {
         categories={this.props.categories}
         handleSubmit={this.handleSubmit}
         isEditing={true}
-        formAction="Update Post"
+        formAction="Update"
       />
     );
   }

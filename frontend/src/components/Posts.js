@@ -22,7 +22,7 @@ export default class Posts extends PureComponent {
     return (
       <div>
         <FormGroup controlId="formControlsSelect">
-          <ControlLabel>Select</ControlLabel>
+          <ControlLabel>Sort by:</ControlLabel>
           <FormControl componentClass="select" default="timestamp" onChange={this.handleSort}>
             <option default value="timestamp">
               Date
@@ -37,7 +37,7 @@ export default class Posts extends PureComponent {
               <Link to={`/posts/${post.id}`}>{post.title}</Link> posted on{' '}
               {formatDate(post.timestamp)} <FontAwesomeIcon icon={faThumbsUp} /> {post.voteScore}{' '}
               <FontAwesomeIcon icon={faComments} /> {post.commentCount}
-              <p>
+              <div>
                 <ButtonGroup>
                   <Button
                     bsStyle="success"
@@ -64,7 +64,7 @@ export default class Posts extends PureComponent {
                     Delete
                   </Button>
                 </ButtonGroup>
-              </p>
+              </div>
             </div>
           ))}
         </div>

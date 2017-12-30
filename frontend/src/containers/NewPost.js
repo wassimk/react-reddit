@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import * as actionCreators from '../actions';
 import { connect } from 'react-redux';
-import serializeForm from '../util/serializeForm';
 import { PostForm } from '../components';
 import { bindActionCreators } from 'redux';
+import serialize from 'form-serialize';
 
 class NewPost extends Component {
   form = {};
@@ -13,8 +13,12 @@ class NewPost extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const formValues = serializeForm(this.form);
-    this.props.actions.createPost(formValues).then(post => {
+
+    const form = e.target;
+
+    const formParams = serialize(form, { hash: true });
+
+    this.props.actions.createPost(formParams).then(post => {
       this.props.history.push(`/posts/${post.id}`);
     });
   };
@@ -22,11 +26,10 @@ class NewPost extends Component {
   render() {
     return (
       <PostForm
-        innerRef={this.form}
         post={this.props.post}
         categories={this.props.categories}
         handleSubmit={this.handleSubmit}
-        formAction="Add Post"
+        formAction="Add"
       />
     );
   }
