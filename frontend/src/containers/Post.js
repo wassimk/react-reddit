@@ -23,6 +23,10 @@ class Post extends Component {
   };
 
   render() {
+    if (!this.props.categories) return null;
+    if (!this.props.post) return null;
+    if (!this.props.comments) return null;
+
     const { comments, actions, post, categories } = this.props;
 
     return (
