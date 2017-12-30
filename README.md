@@ -4,8 +4,6 @@ Reddit is a React project from the [Udacity React Nanodegree](https://www.udacit
 
 ### Setup and Run
 
-The project has a `frontend/` and `server/` folder. You just need to open each folder and run them both with:
+The project is comprised of two pieces, a frontend client written in React and a backend API server written in Node. Both need to run simutanelous for the applciation to function.
 
-* Install dependencies with `yarn install`
-* Start with  `yarn start`
-
+You can learn how to run each of them in the [frontend](./frontend/) and [server][./server/] directores.
