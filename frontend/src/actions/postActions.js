@@ -19,6 +19,8 @@ export const fetchPost = id => {
   return async (dispatch, getState) => {
     const post = await fetchAsync(`http://localhost:3001/posts/${id}`);
 
+    if (post.id == null) window.location = '/';
+
     dispatch({
       type: types.SET_POST,
       payload: {
