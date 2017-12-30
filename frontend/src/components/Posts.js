@@ -35,7 +35,8 @@ export default class Posts extends PureComponent {
           {orderBy(this.props.posts, this.state.orderBy).map((post, index) => (
             <div key={index}>
               <Link to={`/posts/${post.id}`}>{post.title}</Link> posted on{' '}
-              {formatDate(post.timestamp)} <FontAwesomeIcon icon={faThumbsUp} /> {post.voteScore}{' '}
+              <em>{formatDate(post.timestamp)}</em> by <strong>{post.author}</strong>{' '}
+              <FontAwesomeIcon icon={faThumbsUp} /> {post.voteScore}{' '}
               <FontAwesomeIcon icon={faComments} /> {post.commentCount}
               <div>
                 <ButtonGroup>
